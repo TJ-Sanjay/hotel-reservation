@@ -21,6 +21,22 @@ def table_1_page():
     window.destroy()
     import table_1
 
+def table_2_page():
+    window.destroy()
+    import table_2
+
+def table_3_page():
+    window.destroy()
+    import table_3
+
+def table_4_page():
+    window.destroy()
+    import table_4
+
+def reservationpage():
+    window.destroy()
+    import reservation
+
 window = Tk()
 
 window.geometry("1280x832")
@@ -172,7 +188,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_5 clicked"),
+    command=lambda: table_2_page(),
     relief="flat"
 )
 button_5.place(
@@ -188,7 +204,7 @@ button_6 = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_6 clicked"),
+    command=lambda: table_3_page(),
     relief="flat"
 )
 button_6.place(
@@ -204,7 +220,7 @@ button_7 = Button(
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_7 clicked"),
+    command=lambda: table_4_page(),
     relief="flat"
 )
 button_7.place(
@@ -213,5 +229,18 @@ button_7.place(
     width=163.0,
     height=66.0
 )
+
+image_image_8 = PhotoImage(
+    file=relative_to_assets("image_8.png"))
+
+back_button = Button(
+    image=image_image_8,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: reservationpage(),
+    relief="flat"
+)
+back_button.place(x=50,y=700)
+
 window.resizable(False, False)
 window.mainloop()
