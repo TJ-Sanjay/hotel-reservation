@@ -39,7 +39,7 @@ def reservation_page():
 
 window = Tk()
 
-window.geometry("1280x832")
+window.geometry("1280x700")
 window.configure(bg="#FFFFFF")
 
 canvas = Canvas(
@@ -239,7 +239,7 @@ back_button = Button(
     command=lambda: reservation_page(),
     relief="flat"
 )
-back_button.place(x=50, y=700)
+back_button.place(x=50, y=650)
 
 window.resizable(False, False)
 window.mainloop()

@@ -56,7 +56,7 @@ def relative_to_assets(path: str) -> Path:
 
 window = Tk()
 
-window.geometry("1280x780")
+window.geometry("1280x700")
 window.configure(bg="#FFFFFF")
 
 canvas = Canvas(
@@ -202,7 +202,7 @@ back_button = Button(
     command=lambda: input_page(),
     relief="flat"
 )
-back_button.place(x=50, y=700)
+back_button.place(x=50, y=650)
 
 time_box = ttk.Combobox(window, values=time_format, width=5)
 time_box.current(0)
