@@ -2,8 +2,9 @@ from subprocess import call
 from pathlib import Path
 import tkinter as tk
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Button, PhotoImage, ttk, Label
+from tkinter import Tk, Canvas, Button, PhotoImage, ttk, Label
 from tkcalendar import Calendar
+from Time_slots import *
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_1_assets\frame0")
@@ -32,6 +33,21 @@ def get_selected_date():
     # Button to print selected date
     submit_button = ttk.Button(top, text="Submit", command=print_date)
     submit_button.pack(pady=10)
+
+
+def slot_pick(e):
+    if time_box.get() == "AM":
+        slot_box.config(values=time_slots_am)
+        slot_box.current(0)
+    if time_box.get() == "PM":
+        slot_box.config(values=time_slots_pm)
+        slot_box.current(0)
+
+
+def print_time():
+    slot = slot_box.get()
+    label = Label(text=slot, font=20, bg="#D9D9D9")
+    label.place(x=390, y=498)
 
 
 def relative_to_assets(path: str) -> Path:
@@ -135,19 +151,6 @@ entry_1.place(
     y=373.0
 )
 
-entry_3 = Entry(
-    font=20,
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000000",
-    highlightthickness=0
-)
-entry_3.place(
-    x=397,
-    y=491.0,
-    width=550.0,
-    height=40.0
-)
 
 image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
@@ -163,7 +166,7 @@ button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: print_time(),
     relief="flat"
 )
 button_4.place(
@@ -201,5 +204,13 @@ back_button = Button(
 )
 back_button.place(x=50, y=700)
 
+time_box = ttk.Combobox(window, values=time_format, width=5)
+time_box.current(0)
+time_box.place(x=923, y=500)
+time_box.bind("<<ComboboxSelected>>", slot_pick)
+
+slot_box = ttk.Combobox(window, values=[" "], width=12)
+slot_box.current(0)
+slot_box.place(x=800, y=500)
 window.resizable(False, False)
 window.mainloop()
