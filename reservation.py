@@ -19,7 +19,7 @@ def input_page():
 
 window = Tk()
 
-window.geometry("1280x800")
+window.geometry("1280x832")
 window.configure(bg="#FFFFFF")
 
 canvas = Canvas(

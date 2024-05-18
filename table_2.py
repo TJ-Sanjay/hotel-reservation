@@ -1,14 +1,14 @@
 from pathlib import Path
-import tkinter as tk
-# from tkinter import *
-# Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Button, PhotoImage, ttk, Label
-from tkcalendar import Calendar
 from subprocess import call
 from Time_slots import *
+import tkinter.messagebox
+from booking import get_and_edit_value_in_excel
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_2_assets\frame0")
+
+path_of_exel = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
 
 
 def input_page():
@@ -16,24 +16,10 @@ def input_page():
     call(["python", "input.py"])
 
 
-def get_selected_date():
-    def print_date():
-        selected_date = date_picker.get_date()
-        label = Label(text=selected_date, font=20, bg="#D9D9D9")
-        label.place(x=390, y=375)
-        return selected_date
-
-    top = tk.Toplevel(window)
-    top.title("Select Date")
-
-    # Date picker
-    date_picker = Calendar(top, date_pattern="dd/mm/yyyy", width=12, background='#00FF00',
-                           foreground='white', borderwidth=2)
-    date_picker.pack(padx=10, pady=10)
-
-    # Button to print selected date
-    submit_button = ttk.Button(top, text="Submit", command=print_date)
-    submit_button.pack(pady=10)
+def print_date():
+    selected_date = date_box.get()
+    label = Label(text=selected_date, font=20, bg="#D9D9D9")
+    label.place(x=390, y=375)
 
 
 def slot_pick(e):
@@ -49,6 +35,28 @@ def print_time():
     slot = slot_box.get()
     label = Label(text=slot, font=20, bg="#D9D9D9")
     label.place(x=390, y=498)
+
+
+def checking():
+    dat = date_box.get()
+    time = time_box.get()
+    slot_time = slot_box.get()
+    if time == "AM":
+        status = get_and_edit_value_in_excel(path_of_exel, "Table 2 AM", dat, slot_time)
+        if status == "not available":
+            tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
+        elif status == "available":
+            print("booked")
+        elif status == "invalid input":
+            tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
+    elif time == "PM":
+        status = get_and_edit_value_in_excel(path_of_exel, "Table 2 PM", dat, slot_time)
+        if status == "not available":
+            tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
+        elif status == "available":
+            print("booked")
+        elif status == "invalid input":
+            tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
 
 
 def relative_to_assets(path: str) -> Path:
@@ -135,23 +143,6 @@ entry_bg_1 = canvas.create_image(
     image=entry_image_1
 )
 
-cal_image_1 = PhotoImage(
-    file=relative_to_assets("image_5.png"))
-
-entry_1 = Button(window,
-                 image=cal_image_1,
-                 command=get_selected_date,
-                 font=20,
-                 bd=0,
-                 bg="#D9D9D9",
-                 fg="#000000",
-                 highlightthickness=0
-                 )
-entry_1.place(
-    x=950,
-    y=373.0
-)
-
 image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
 image_2 = canvas.create_image(
@@ -166,7 +157,7 @@ button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print_time(),
+    command=lambda: [print_time(), print_date(), checking()],
     relief="flat"
 )
 button_4.place(
@@ -211,6 +202,10 @@ time_box.bind("<<ComboboxSelected>>", slot_pick)
 slot_box = ttk.Combobox(window, values=[" "], width=12)
 slot_box.current(0)
 slot_box.place(x=800, y=500)
+
+date_box = ttk.Combobox(window, values=dates, width=10)
+date_box.current(0)
+date_box.place(x=900, y=378)
 
 window.resizable(False, False)
 window.mainloop()
