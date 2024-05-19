@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 
+
 def get_and_edit_value_in_excel(file_path, sheet_name, date, slot):
     try:
         # Load the workbook and the specified sheet
@@ -25,27 +26,24 @@ def get_and_edit_value_in_excel(file_path, sheet_name, date, slot):
 
         # Check if both date and slot were found
         if slot_column is None or date_row is None:
-           status="invalid input"
-           return status
+            status = "invalid input"
+            return status
 
         # Access the original value
         original_value = sheet.cell(row=date_row, column=slot_column).value
-        if original_value>0:
+        if original_value > 0:
             sheet.cell(row=date_row, column=slot_column).value -= 1
-            status="available"
+            status = "available"
 
         # Update the cell with the new value
         else:
-            status="not available"
+            status = "not available"
 
         # Save the workbook
         workbook.save(file_path)
 
-
-
     except FileNotFoundError:
-        status="invalid input"
+        status = "invalid input"
 
     return status
 # Example usage
-

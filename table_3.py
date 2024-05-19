@@ -1,10 +1,11 @@
 from subprocess import call
 from pathlib import Path
 from Time_slots import *
-# Explicit imports to satisfy Flake8
+from confirmation import *
 from tkinter import Tk, Canvas, Button, PhotoImage, ttk, Label
 from booking import get_and_edit_value_in_excel
 import tkinter.messagebox
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_3_assets\frame0")
 
@@ -46,7 +47,9 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_2_am"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
     elif time == "PM":
@@ -54,7 +57,9 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_2_am"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
 
@@ -157,7 +162,7 @@ button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [print_time(), print_date(),checking()],
+    command=lambda: [print_time(), print_date(), checking()],
     relief="flat"
 )
 button_4.place(

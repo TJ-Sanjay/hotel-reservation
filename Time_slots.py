@@ -12,7 +12,3 @@ next_10_dates = [today_date + timedelta(days=i) for i in range(0, 10)]
 dates = []
 for date in next_10_dates:
     dates.append(date.strftime("%d/%m/%Y"))
-
-
-
-

@@ -4,6 +4,7 @@ from subprocess import call
 from Time_slots import *
 import tkinter.messagebox
 from booking import get_and_edit_value_in_excel
+from confirmation import *
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_2_assets\frame0")
@@ -46,7 +47,9 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_2_am"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
     elif time == "PM":
@@ -54,7 +57,9 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_2_am"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
 

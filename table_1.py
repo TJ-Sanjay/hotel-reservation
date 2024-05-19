@@ -2,14 +2,15 @@ import tkinter
 from subprocess import call
 from pathlib import Path
 import tkinter.messagebox
-# Explicit imports to satisfy Flake8
+from confirmation import *
 from tkinter import Tk, Canvas, Button, PhotoImage, ttk, Label
 from Time_slots import *
 from booking import get_and_edit_value_in_excel
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_1_assets\frame0")
 
-path = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
+path_of_exel = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
 
 
 def input_page():
@@ -28,19 +29,23 @@ def checking():
     time = time_box.get()
     slot_time = slot_box.get()
     if time == "AM":
-        status = get_and_edit_value_in_excel(path, "Table 1 AM", dat, slot_time)
+        status = get_and_edit_value_in_excel(path_of_exel, "Table 1 AM", dat, slot_time)
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_1_am"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
     elif time == "PM":
-        status = get_and_edit_value_in_excel(path, "Table 1 PM", dat, slot_time)
+        status = get_and_edit_value_in_excel(path_of_exel, "Table 1 PM", dat, slot_time)
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            print("booked")
+            table_id = "table_1_pm"
+            window.destroy()
+            confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
             tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
 

@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
+
 time_slots_am_dict = {"08:00-09:00": 5, "09:00-10:00": 5, "10:00-11:00": 5, "11:00-12:00": 5}
 time_slots_pm_dict = {"12:00-01:00": 5, "01:00-02:00": 5, "02:00-03:00": 5, "05:00-06:00": 5, "06:00-07:00": 5,
                       "07:00-08:00": 5,
@@ -20,7 +21,6 @@ table_3_am = dict.fromkeys(dates, time_slots_am_dict)
 table_3_pm = dict.fromkeys(dates, time_slots_pm_dict)
 table_4_am = dict.fromkeys(dates, time_slots_am_dict)
 table_4_pm = dict.fromkeys(dates, time_slots_pm_dict)
-
 
 # Create DataFrames
 df_1_am = pd.DataFrame.from_dict(table_1_am).T

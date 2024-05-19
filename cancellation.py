@@ -1,20 +1,21 @@
 from pathlib import Path
-from subprocess import call
+
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"reservation_assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"cancellation_assets\frame0")
+
+
+def cancel():
+    booking_id = entry_1.get()
+    date = entry_2.get()
+    time_ = entry_3.get()
 
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
-
-def input_page():
-    window.destroy()
-    call(["python", "input.py"])
 
 
 window = Tk()
@@ -97,52 +98,68 @@ image_2 = canvas.create_image(
     image=image_image_2
 )
 
-image_image_3 = PhotoImage(
-    file=relative_to_assets("image_3.png"))
-image_3 = canvas.create_image(
-    601.0,
-    409.0,
-    image=image_image_3
-)
-
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: input_page(),
-    relief="flat"
-)
-button_4.place(
-    x=430.0,
-    y=370.0,
-    width=363.0,
-    height=47.0
-)
-
-button_image_5 = PhotoImage(
-    file=relative_to_assets("button_5.png"))
-button_5 = Button(
-    image=button_image_5,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("jhjvdck"),
-    relief="flat"
-)
-button_5.place(
-    x=430.0,
-    y=445.0,
-    width=363.0,
-    height=47.0
-)
-
 entry_image_1 = PhotoImage(
     file=relative_to_assets("entry_1.png"))
 entry_bg_1 = canvas.create_image(
     209.5,
     52.5,
     image=entry_image_1
+)
+button_image_4 = PhotoImage(
+    file=relative_to_assets("button_4.png"))
+button_4 = Button(
+    image=button_image_4,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_4 clicked"),
+    relief="flat"
+)
+button_4.place(
+    x=498.0,
+    y=586.0,
+    width=283.0,
+    height=57.0
+)
+entry_1 = Entry(
+    font=20,
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_1.place(
+    x=400.0,
+    y=328.0,
+    width=400.0,
+    height=40.0
+)
+
+entry_2 = Entry(
+    font=20,
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_2.place(
+    x=565.0,
+    y=407.0,
+    width=400.0,
+    height=40.0
+)
+
+entry_3 = Entry(
+    font=20,
+    bd=0,
+    bg="#D9D9D9",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_3.place(
+    x=585.0,
+    y=480.0,
+    width=400.0,
+    height=40.0
 )
 
 window.resizable(False, False)
