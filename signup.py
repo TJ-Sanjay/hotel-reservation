@@ -9,7 +9,7 @@ import tkinter.messagebox
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"signup_assets\frame0")
 
-path_of_exel = "E:\\software project\\hotel-reservation-main\\login.csv"
+path_of_exel = "login.csv"
 
 
 def sign_in():

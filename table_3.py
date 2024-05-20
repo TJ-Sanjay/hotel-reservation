@@ -9,7 +9,7 @@ import tkinter.messagebox
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_3_assets\frame0")
 
-path_of_exel = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
+path_of_exel = "schedule.xlsx"
 
 
 def input_page():
@@ -47,7 +47,7 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            table_id = "table_2_am"
+            table_id = "table_3_am"
             window.destroy()
             confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
@@ -57,7 +57,7 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            table_id = "table_2_am"
+            table_id = "table_3_am"
             window.destroy()
             confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":

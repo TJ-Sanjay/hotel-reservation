@@ -52,5 +52,5 @@ def update_schedule(file_path):
 
 
 # Usage
-filepath = 'E:\\software project\\hotel-reservation-main\\schedule.xlsx'
+filepath = 'schedule.xlsx'
 update_schedule(filepath)

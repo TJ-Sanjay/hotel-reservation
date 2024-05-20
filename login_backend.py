@@ -12,7 +12,7 @@ def read_credentials(file_path):
 
 
 def write_credentials(file_path, credentials):
-    path = "E:\\software project\\hotel-reservation-main\\login.csv"
+    path = "login.csv"
     credential = read_credentials(path)
     user = list(credentials.keys())
     if user[0] in credential:
@@ -27,7 +27,7 @@ def write_credentials(file_path, credentials):
 
 
 def login(user_name, pass_word):
-    file_path = "E:\\software project\\hotel-reservation-main\\login.csv"
+    file_path = "login.csv"
     credentials = read_credentials(file_path)
     if user_name in credentials and credentials[user_name] == pass_word:
         status = "successfully"

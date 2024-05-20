@@ -9,7 +9,7 @@ from confirmation import *
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_2_assets\frame0")
 
-path_of_exel = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
+path_of_exel = "schedule.xlsx"
 
 
 def input_page():

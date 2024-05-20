@@ -10,7 +10,7 @@ from booking import get_and_edit_value_in_excel
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"table_1_assets\frame0")
 
-path_of_exel = "E:\\software project\\hotel-reservation-main\\schedule.xlsx"
+path_of_exel = "schedule.xlsx"
 
 
 def input_page():
