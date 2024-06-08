@@ -8,6 +8,19 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"input_assets\frame0")
 
 
+def about():
+    call(["python", "about_us.py"])
+
+
+def contact_():
+    call(["python", "contact.py"])
+
+
+def home():
+    window.destroy()
+    call(["python", "reservation.py"])
+
+
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -67,7 +80,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_1.place(
@@ -83,7 +96,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: home(),
     relief="flat"
 )
 button_2.place(
@@ -99,7 +112,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_3.place(

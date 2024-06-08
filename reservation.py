@@ -7,6 +7,10 @@ from tkinter import Tk, Canvas, Button, PhotoImage
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"reservation_assets\frame0")
 
+def about():
+    call(["python", "about_us.py"])
+def contact_():
+    call(["python", "contact.py"])
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -16,7 +20,9 @@ def input_page():
     window.destroy()
     call(["python", "input.py"])
 
-
+def cancel():
+    window.destroy()
+    call(["python", "cancellation.py"])
 window = Tk()
 
 window.geometry("1280x832")
@@ -47,7 +53,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_1.place(
@@ -57,21 +63,7 @@ button_1.place(
     height=42.0
 )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-button_2.place(
-    x=821.0,
-    y=31.0,
-    width=85.0,
-    height=42.0
-)
+
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
@@ -79,7 +71,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_3.place(
@@ -127,7 +119,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("jhjvdck"),
+    command=lambda: cancel(),
     relief="flat"
 )
 button_5.place(

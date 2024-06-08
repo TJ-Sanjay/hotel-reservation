@@ -1,17 +1,67 @@
+import tkinter
 from pathlib import Path
-
-# from tkinter import *
-# Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Button, PhotoImage
+from booking import get_and_minus_value_in_excel
+import tkinter.messagebox
+from Time_slots import *
+from subprocess import call
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage, ttk
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"cancellation_assets\frame0")
 
+path_of_exel = "schedule.xlsx"
+
+
+def about():
+    call(["python", "about_us.py"])
+
+
+def contact_():
+    call(["python", "contact.py"])
+
+
+def home():
+    window.destroy()
+    call(["python", "reservation.py"])
+
+
+def slot_pick(e):
+    if time_box.get() == "AM":
+        slot_box.config(values=time_slots_am)
+        slot_box.current(0)
+    if time_box.get() == "PM":
+        slot_box.config(values=time_slots_pm)
+        slot_box.current(0)
+
 
 def cancel():
     booking_id = entry_1.get()
-    date = entry_2.get()
-    time_ = entry_3.get()
+    if len(booking_id) == 0:
+        tkinter.messagebox.showinfo("Welcome to GFG.", "Please Enter Valid Booking ID")
+    else:
+        spl = booking_id.split("_")
+        sheet_name = f"{spl[0].capitalize()} {spl[1]} {spl[2].upper()}"
+        dat = date_box.get()
+        if dat not in dates[1:]:
+            tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
+            return
+        slot_time = slot_box.get()
+        if spl[2].upper() == "AM":
+            status = get_and_minus_value_in_excel(path_of_exel, sheet_name, dat, slot_time)
+            if status == "wrong":
+                tkinter.messagebox.showinfo("Welcome to GFG.", "Please Enter Valid Booking ID")
+            elif status == "success":
+                tkinter.messagebox.showinfo("Welcome to GFG.", "Successfully Cancelled")
+            elif status == "invalid input":
+                tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
+        elif spl[2].upper() == "PM":
+            status = get_and_minus_value_in_excel(path_of_exel, sheet_name, dat, slot_time)
+            if status == "wrong":
+                tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
+            elif status == "success":
+                tkinter.messagebox.showinfo("Welcome to GFG.", "Successfully Cancelled")
+            elif status == "invalid input":
+                tkinter.messagebox.showinfo("Welcome to GFG.", 'Invalid Input Please Choose Correct Option')
 
 
 def relative_to_assets(path: str) -> Path:
@@ -48,7 +98,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_1.place(
@@ -64,7 +114,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: home(),
     relief="flat"
 )
 button_2.place(
@@ -80,7 +130,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_3.place(
@@ -111,7 +161,7 @@ button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: cancel(),
     relief="flat"
 )
 button_4.place(
@@ -134,33 +184,18 @@ entry_1.place(
     height=40.0
 )
 
-entry_2 = Entry(
-    font=20,
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_2.place(
-    x=565.0,
-    y=407.0,
-    width=400.0,
-    height=40.0
-)
+time_box = ttk.Combobox(window, values=time_format, width=5)
+time_box.current(0)
+time_box.place(x=960, y=490)
+time_box.bind("<<ComboboxSelected>>", slot_pick)
 
-entry_3 = Entry(
-    font=20,
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_3.place(
-    x=585.0,
-    y=480.0,
-    width=400.0,
-    height=40.0
-)
+slot_box = ttk.Combobox(window, values=[" "], width=12)
+slot_box.current(0)
+slot_box.place(x=837, y=490)
+
+date_box = ttk.Combobox(window, values=dates[1:], width=10)
+date_box.current(0)
+date_box.place(x=930, y=417)
 
 window.resizable(False, False)
 window.mainloop()

@@ -1,5 +1,6 @@
 import tkinter
 import update_exel
+from login_backend import *
 import tkinter.messagebox
 from subprocess import call
 from pathlib import Path
@@ -14,6 +15,14 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
+def about():
+    call(["python", "about_us.py"])
+
+
+def contact_():
+    call(["python", "contact.py"])
+
+
 def sign_up():
     window.destroy()
     call(["python", "signup.py"])
@@ -25,7 +34,8 @@ def log_in():
     if len(user_name) == 0 or len(password) == 0:
         tkinter.messagebox.showinfo("Welcome to Royal Embassy.", "Invalid Username Or Password")
     else:
-        status = login(user_name, password)
+        login_class = PersistentHashTable()
+        status = login_class.login(user_name, password)
         if status == "successfully":
             window.destroy()
             call(["python", "reservation.py"])
@@ -172,29 +182,13 @@ entry_bg_3 = canvas.create_image(
     image=entry_image_3
 )
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-button_3.place(
-    x=876.0,
-    y=31.0,
-    width=85.0,
-    height=42.0
-)
-
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
 button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_4.place(
@@ -210,7 +204,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_5 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_5.place(

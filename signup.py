@@ -1,5 +1,6 @@
 import tkinter
 from subprocess import call
+from login_backend import *
 from pathlib import Path
 from login_backend import *
 # Explicit imports to satisfy Flake8
@@ -9,7 +10,12 @@ import tkinter.messagebox
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"signup_assets\frame0")
 
-path_of_exel = "login.csv"
+def about():
+    call(["python", "about_us.py"])
+
+
+def contact_():
+    call(["python", "contact.py"])
 
 
 def sign_in():
@@ -28,7 +34,8 @@ def sign_up():
     elif password != cn_password:
         tkinter.messagebox.showinfo("Welcome to Royal Embassy.", "Both Passwords Are Not Same")
     elif password == cn_password and len(user_name) >= 5:
-        status = write_credentials(path_of_exel, {user_name: password})
+        login_class = PersistentHashTable()
+        status = login_class.insert(user_name, password)
         if status == "successfully":
             window.destroy()
             call(["python", "reservation.py"])
@@ -193,29 +200,13 @@ entry_3.place(
     height=40.0
 )
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-button_3.place(
-    x=876.0,
-    y=31.0,
-    width=85.0,
-    height=42.0
-)
-
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
 button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_4.place(
@@ -231,7 +222,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_5 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_5.place(

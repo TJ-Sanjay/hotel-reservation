@@ -6,8 +6,7 @@ time_slots_pm_dict = {"12:00-01:00": 5, "01:00-02:00": 5, "02:00-03:00": 5, "05:
                       "07:00-08:00": 5,
                       "08:00-09:00": 5, "09:00-10:00": 5, "10:00-11:00": 5}
 
-todaydate = datetime.now().date()
-today_date=todaydate - timedelta(1)
+today_date = datetime.now().date()
 
 next_10_dates = [today_date + timedelta(days=i) for i in range(0, 10)]
 

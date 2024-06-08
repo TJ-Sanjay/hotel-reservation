@@ -12,6 +12,19 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"table_2_assets\frame0")
 path_of_exel = "schedule.xlsx"
 
 
+def about():
+    call(["python", "about_us.py"])
+
+
+def contact_():
+    call(["python", "contact.py"])
+
+
+def home():
+    window.destroy()
+    call(["python", "reservation.py"])
+
+
 def input_page():
     window.destroy()
     call(["python", "input.py"])
@@ -57,7 +70,7 @@ def checking():
         if status == "not available":
             tkinter.messagebox.showinfo("Welcome to GFG.", "No Seats Available.Please Book On Other Slot")
         elif status == "available":
-            table_id = "table_2_am"
+            table_id = "table_2_pm"
             window.destroy()
             confirmation_page(table_id, dat, slot_time)
         elif status == "invalid input":
@@ -98,7 +111,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: about(),
     relief="flat"
 )
 button_1.place(
@@ -114,7 +127,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: home(),
     relief="flat"
 )
 button_2.place(
@@ -130,7 +143,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: contact_(),
     relief="flat"
 )
 button_3.place(
