@@ -14,7 +14,7 @@ label = tk.Label(root, text="About Our Hotel")
 label.pack(pady=10)
 
 # Create a ScrolledText widget for the about content
-about_content_box = scrolledtext.ScrolledText(root, height=30,width=100)
+about_content_box = scrolledtext.ScrolledText(root, height=30,width=100,bg='lightgrey')
 about_content_box.pack(pady=10)
 
 # Predefined about content for the hotel
